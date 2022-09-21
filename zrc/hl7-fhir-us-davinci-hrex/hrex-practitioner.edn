@@ -1,0 +1,65 @@
+{ns hl7-fhir-us-davinci-hrex.hrex-practitioner,
+ import
+ #{hl7-fhir-r4-core.BackboneElement
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-us-core.us-core-practitioner
+   hl7-fhir-r4-core.ContactPoint
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.uri
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.CodeableConcept
+   hl7-fhir-r4-core.Identifier},
+ schema
+ {:zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen/desc
+  "Constraints on the US Core Practitioner profiles requiring support for qualification and requiring support for an additional identifier type",
+  :zen.fhir/type "Practitioner",
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitioner",
+  :zen.fhir/version "0.5.21-6",
+  :confirms
+  #{hl7-fhir-us-core.us-core-practitioner/schema zen.fhir/Resource},
+  :type zen/map,
+  :keys
+  {:identifier
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
+     :type zen/map,
+     :keys
+     {:system
+      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
+   :telecom
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
+     :type zen/map,
+     :keys
+     {:system {:confirms #{hl7-fhir-r4-core.code/schema}},
+      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :value {:confirms #{hl7-fhir-r4-core.string/schema}},
+      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
+   :qualification
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
+     :type zen/map,
+     :keys
+     {:code
+      {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
+       :type zen/map,
+       :keys
+       {:text
+        {:confirms #{hl7-fhir-r4-core.string/schema},
+         :fhir/flags #{:MS}},
+        :_text {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+       :require #{:text},
+       :fhir/flags #{:MS}}},
+     :require #{:code},
+     :fhir/flags #{:MS}}}}}}

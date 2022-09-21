@@ -1,0 +1,15 @@
+{ns hl7-fhir-us-davinci-hrex.search.hrex-coverage-subscriber,
+ import #{zen.fhir},
+ search
+ {:zen/tags #{zen.fhir/search},
+  :fhir/id "hrex-coverage-subscriber",
+  :fhir/url
+  "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-subscriber",
+  :fhir/type "reference",
+  :name "subscriber",
+  :expr
+  {:Coverage
+   {:knife [["subscriber"]],
+    :jsonpath ["$.\"subscriber\"[*]"],
+    :data-types #{{:type "Reference", :polymorphic? false}},
+    :template :reference}}}}

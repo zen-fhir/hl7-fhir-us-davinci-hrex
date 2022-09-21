@@ -1,0 +1,15 @@
+{ns hl7-fhir-us-davinci-hrex.search.hrex-coverage-patient,
+ import #{zen.fhir},
+ search
+ {:zen/tags #{zen.fhir/search},
+  :fhir/id "hrex-coverage-patient",
+  :fhir/url
+  "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-patient",
+  :fhir/type "reference",
+  :name "patient",
+  :expr
+  {:Coverage
+   {:knife [["beneficiary"]],
+    :jsonpath ["$.\"beneficiary\"[*]"],
+    :data-types #{{:type "Reference", :polymorphic? false}},
+    :template :reference}}}}
