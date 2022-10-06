@@ -7,13 +7,21 @@
    hl7-fhir-us-davinci-hrex.hrex-parameters-member-match-out
    hl7-fhir-us-core
    hl7-fhir-r4-core
+   hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider
+   hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate
    hl7-fhir-us-davinci-hrex.hrex-provenance
+   hl7-fhir-us-davinci-hrex.hrex-patient-demographics
    hl7-fhir-us-davinci-hrex.search.hrex-coverage-payor
    hl7-fhir-us-davinci-hrex.hrex-task-data-request
    hl7-fhir-us-davinci-hrex.hrex-coverage
    hl7-fhir-us-davinci-hrex.search.hrex-provenance-target
    hl7-fhir-us-davinci-hrex.search.hrex-coverage-subscriber
+   hl7-fhir-us-davinci-hrex.extension-itemTraceNumber
    hl7-fhir-us-davinci-hrex.value-set.hrex-task-status
+   hl7-fhir-us-davinci-hrex.hrex-claimresponse
+   hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate
+   hl7-fhir-us-davinci-hrex.hrex-consent
    hl7-fhir-us-davinci-hrex.hrex-organization
+   hl7-fhir-us-davinci-hrex.value-set.hrex-consent-policy
    hl7-fhir-us-davinci-hrex.search.hrex-coverage-patient
    hl7-fhir-us-davinci-hrex.search.hrex-coverage-identifier}}

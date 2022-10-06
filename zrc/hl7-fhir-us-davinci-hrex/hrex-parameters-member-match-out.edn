@@ -2,14 +2,12 @@
  import
  #{hl7-fhir-r4-core.BackboneElement
    zen.fhir
-   hl7-fhir-us-davinci-hrex.hrex-coverage
    hl7-fhir-r4-core.string
-   hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.Parameters
-   hl7-fhir-r4-core.Resource},
+   hl7-fhir-r4-core.Identifier
+   hl7-fhir-r4-core.Parameters},
  schema
- {:zen.fhir/version "0.5.22",
+ {:zen.fhir/version "0.5.22-1",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Parameters/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -17,12 +15,12 @@
   :require #{:parameter},
   :type zen/map,
   :zen/desc
-  "The Parameters profile for Da Vinci Find Member using Patient and Coverage Resources Response.  The old health plan **SHALL** return the following data if records for member are found: \n * The unique member identifier added to the Patient.identifier in the Patient resource submitted by the new health plan. \n  * The new health plan coverage resource. \n \n (Only one Patient and one Coverage record are to be returned.)",
+  "The Parameters profile for Da Vinci Find Member using Identifier datatype Response.  The old health plan **SHALL** return the following data if records for member are found: \n * The unique member identifier (denoted through identifier parameter) submitted by the new health plan.",
   :keys
   {:parameter
    {:slicing
     {:slices
-     {"memberPatient"
+     {"MemberIdentifier"
       {:schema
        {:type zen/vector,
         :minItems 1,
@@ -31,43 +29,32 @@
         {:type zen/map,
          :keys
          {:name
-          {:const {:value "MemberPatient"},
+          {:const {:value "MemberIdentifier"},
            :confirms #{hl7-fhir-r4-core.string/schema},
            :fhir/flags #{:MS}},
           :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
-          :resource
-          {:confirms
-           #{hl7-fhir-r4-core.Resource/schema
-             hl7-fhir-us-core.us-core-patient/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "MemberPatient"}}},
-      "newCoverage"
-      {:schema
-       {:type zen/vector,
-        :minItems 1,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:name
-          {:const {:value "NewCoverage"},
-           :confirms #{hl7-fhir-r4-core.string/schema},
-           :fhir/flags #{:MS}},
-          :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
-          :resource
-          {:confirms
-           #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema
-             hl7-fhir-r4-core.Resource/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "NewCoverage"}}}}},
+          :value
+          {:fhir/polymorphic true,
+           :type zen/map,
+           :keys
+           {:Identifier
+            {:confirms #{hl7-fhir-r4-core.Identifier/schema}},
+            :type
+            {:match
+             {:coding
+              #{{:system
+                 "http://terminology.hl7.org/CodeSystem/v2-0203",
+                 :code "MB"}}},
+             :fhir/flags #{:MS}},
+            :value #:fhir{:flags #{:MS}}},
+           :require #{:value :type},
+           :fhir/flags #{:MS}}},
+         :require #{:value}}},
+       :filter {:engine :match, :match {:name "MemberIdentifier"}}}}},
     :type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
      :fhir/flags #{:MS}},
-    :minItems 2,
-    :maxItems 2}},
+    :minItems 1,
+    :maxItems 1}},
   :zen.fhir/type "Parameters"}}

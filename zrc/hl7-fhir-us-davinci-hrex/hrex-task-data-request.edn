@@ -16,7 +16,7 @@
    hl7-fhir-r4-core.CodeableConcept
    hl7-fhir-r4-core.Claim},
  schema
- {:zen.fhir/version "0.5.22",
+ {:zen.fhir/version "0.5.22-1",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Task/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -131,6 +131,10 @@
    {:const {:value "order"},
     :confirms #{hl7-fhir-r4-core.code/schema},
     :fhir/flags #{:MS}},
+   :focus
+   {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
+    :zen.fhir/reference {:refers #{}},
+    :zen/desc "What task is acting on"},
    :input
    {:slicing
     {:slices
@@ -207,7 +211,7 @@
     {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
      :fhir/flags #{:MS},
      :zen.fhir/reference {:refers #{}},
-     :zen/desc "Also known as Member identifier"}},
+     :zen/desc "Authorization for data request"}},
    :owner
    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
     :fhir/flags #{:MS},

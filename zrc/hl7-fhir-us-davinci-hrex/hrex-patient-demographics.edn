@@ -1,0 +1,113 @@
+{ns hl7-fhir-us-davinci-hrex.hrex-patient-demographics,
+ import
+ #{hl7-fhir-r4-core.Period
+   hl7-fhir-us-core.us-core-birthsex
+   hl7-fhir-r4-core.code
+   zen.fhir
+   hl7-fhir-r4-core.string
+   hl7-fhir-r4-core.Patient
+   hl7-fhir-r4-core.value-set.administrative-gender
+   hl7-fhir-r4-core.date
+   hl7-fhir-r4-core.HumanName
+   hl7-fhir-us-core.value-set.birthsex
+   hl7-fhir-r4-core.Element
+   hl7-fhir-r4-core.Identifier
+   hl7-fhir-r4-core.Address},
+ schema
+ {:zen.fhir/version "0.5.22-1",
+  :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
+  :zen/tags #{zen.fhir/profile-schema zen/schema},
+  :zen.fhir/profileUri
+  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-patient-demographics",
+  :require #{:name :birthDate},
+  :type zen/map,
+  :zen/desc
+  "Defines constraints on the patient resource for the minimal set of data to query and retrieve patient demographic information.",
+  :keys
+  {:birthSex
+   {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
+    :fhir/extensionUri
+    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex",
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol hl7-fhir-us-core.value-set.birthsex/value-set,
+     :strength :required}},
+   :identifier
+   {:slicing
+    {:slices
+     {"umb"
+      {:schema {:type zen/vector, :maxItems 1},
+       :filter
+       {:engine :match,
+        :match
+        {:type
+         {:coding
+          #{{:system
+             "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+             :code "UMB"}}}}}}}},
+    :type zen/vector,
+    :every {:confirms #{hl7-fhir-r4-core.Identifier/schema}}},
+   :name
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.HumanName/schema},
+     :type zen/map,
+     :keys
+     {:family
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_family {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :given
+      {:type zen/vector,
+       :every
+       {:confirms #{hl7-fhir-r4-core.string/schema},
+        :fhir/flags #{:MS}},
+       :minItems 1},
+      :_given
+      {:type zen/vector,
+       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}}},
+     :require #{:given :family},
+     :fhir/flags #{:MS}},
+    :minItems 1},
+   :gender
+   {:confirms #{hl7-fhir-r4-core.code/schema},
+    :fhir/flags #{:MS},
+    :zen.fhir/value-set
+    {:symbol
+     hl7-fhir-r4-core.value-set.administrative-gender/value-set,
+     :strength :required}},
+   :_gender {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :birthDate
+   {:confirms #{hl7-fhir-r4-core.date/schema}, :fhir/flags #{:MS}},
+   :_birthDate {:confirms #{hl7-fhir-r4-core.Element/schema}},
+   :address
+   {:type zen/vector,
+    :every
+    {:confirms #{hl7-fhir-r4-core.Address/schema},
+     :type zen/map,
+     :keys
+     {:_line
+      {:type zen/vector,
+       :every {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      :city
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_city {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :state
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_state {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :line
+      {:type zen/vector,
+       :every
+       {:confirms #{hl7-fhir-r4-core.string/schema},
+        :fhir/flags #{:MS}}},
+      :postalCode
+      {:confirms #{hl7-fhir-r4-core.string/schema},
+       :fhir/flags #{:MS}},
+      :_postalCode {:confirms #{hl7-fhir-r4-core.Element/schema}},
+      :period
+      {:confirms #{hl7-fhir-r4-core.Period/schema},
+       :fhir/flags #{:MS}}},
+     :fhir/flags #{:MS}}}},
+  :zen.fhir/type "Patient"}}

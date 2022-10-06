@@ -7,9 +7,10 @@
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-r4-core.Element
    hl7-fhir-r4-core.Parameters
+   hl7-fhir-us-davinci-hrex.hrex-consent
    hl7-fhir-r4-core.Resource},
  schema
- {:zen.fhir/version "0.5.22",
+ {:zen.fhir/version "0.5.22-1",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Parameters/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -17,7 +18,7 @@
   :require #{:parameter},
   :type zen/map,
   :zen/desc
-  "The Parameters profile for Da Vinci Find Member using Patient and Coverage Resources Request. The resource must contain: \n * MemberPatient - US Core Patient containing member demographics \n  * OldCoverage - details of prior health plan coverage provided by the member, typically from their health plan coverage card \n  * NewCoverage - details of new or prospective health plan coverage, provided by the health plan based upon the member's enrolment",
+  "The Parameters profile for Da Vinci Find Member using Patient and Coverage Resources Request. The resource must contain: \n * MemberPatient - US Core Patient containing member demographics \n  * CoverageToMatch - details of prior health plan coverage provided by the member, typically from their health plan coverage card \n  * CoverageToLink - details of new or prospective health plan coverage, provided by the health plan based upon the member's enrolment",
   :keys
   {:parameter
    {:slicing
@@ -43,7 +44,7 @@
            :zen.fhir/nested {}}},
          :require #{:resource}}},
        :filter {:engine :match, :match {:name "MemberPatient"}}},
-      "oldCoverage"
+      "CoverageToMatch"
       {:schema
        {:type zen/vector,
         :minItems 1,
@@ -52,7 +53,7 @@
         {:type zen/map,
          :keys
          {:name
-          {:const {:value "OldCoverage"},
+          {:const {:value "CoverageToMatch"},
            :confirms #{hl7-fhir-r4-core.string/schema},
            :fhir/flags #{:MS}},
           :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
@@ -63,17 +64,16 @@
            :fhir/flags #{:MS},
            :zen.fhir/nested {}}},
          :require #{:resource}}},
-       :filter {:engine :match, :match {:name "OldCoverage"}}},
-      "newCoverage"
+       :filter {:engine :match, :match {:name "CoverageToMatch"}}},
+      "CoverageToLink"
       {:schema
        {:type zen/vector,
-        :minItems 1,
         :maxItems 1,
         :every
         {:type zen/map,
          :keys
          {:name
-          {:const {:value "NewCoverage"},
+          {:const {:value "CoverageToLink"},
            :confirms #{hl7-fhir-r4-core.string/schema},
            :fhir/flags #{:MS}},
           :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
@@ -84,11 +84,32 @@
            :fhir/flags #{:MS},
            :zen.fhir/nested {}}},
          :require #{:resource}}},
-       :filter {:engine :match, :match {:name "NewCoverage"}}}}},
+       :filter {:engine :match, :match {:name "CoverageToLink"}}},
+      "Consent"
+      {:schema
+       {:type zen/vector,
+        :minItems 1,
+        :maxItems 1,
+        :every
+        {:type zen/map,
+         :keys
+         {:name
+          {:const {:value "Consent"},
+           :confirms #{hl7-fhir-r4-core.string/schema},
+           :fhir/flags #{:MS}},
+          :_name {:confirms #{hl7-fhir-r4-core.Element/schema}},
+          :resource
+          {:confirms
+           #{hl7-fhir-r4-core.Resource/schema
+             hl7-fhir-us-davinci-hrex.hrex-consent/schema},
+           :fhir/flags #{:MS},
+           :zen.fhir/nested {}}},
+         :require #{:resource}}},
+       :filter {:engine :match, :match {:name "Consent"}}}}},
     :type zen/vector,
     :every
     {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
      :fhir/flags #{:MS}},
     :minItems 3,
-    :maxItems 3}},
+    :maxItems 4}},
   :zen.fhir/type "Parameters"}}
