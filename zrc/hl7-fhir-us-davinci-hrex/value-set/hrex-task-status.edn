@@ -4,7 +4,7 @@
  {:zen/tags #{zen.fhir/value-set},
   :zen/desc
   "The set of task codes allowed for use in HRex data request tasks",
-  :zen.fhir/version "0.6.1",
+  :zen.fhir/version "0.6.2",
   :fhir/code-systems
   #{{:fhir/url "http://hl7.org/fhir/task-status",
      :zen.fhir/content :bundled}},
