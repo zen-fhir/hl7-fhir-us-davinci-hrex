@@ -1,15 +1,5 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-practitioner,
- import
- #{hl7-fhir-r4-core.BackboneElement
-   hl7-fhir-r4-core.code
-   zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-r4-core.ContactPoint
-   hl7-fhir-r4-core.string
-   hl7-fhir-r4-core.uri
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.CodeableConcept
-   hl7-fhir-r4-core.Identifier},
+ import #{zen.fhir hl7-fhir-us-core.us-core-practitioner},
  schema
  {:zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen/desc
@@ -17,7 +7,7 @@
   :zen.fhir/type "Practitioner",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitioner",
-  :zen.fhir/version "0.6.3",
+  :zen.fhir/version "0.6.4",
   :confirms
   #{hl7-fhir-us-core.us-core-practitioner/schema zen.fhir/Resource},
   :type zen/map,
@@ -25,40 +15,18 @@
   {:identifier
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Identifier/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:system
-      {:confirms #{hl7-fhir-r4-core.uri/schema}, :fhir/flags #{:MS}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
-   :telecom
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.ContactPoint/schema},
-     :type zen/map,
-     :keys
-     {:system {:confirms #{hl7-fhir-r4-core.code/schema}},
-      :_system {:confirms #{hl7-fhir-r4-core.Element/schema}},
-      :value {:confirms #{hl7-fhir-r4-core.string/schema}},
-      :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}}}},
+     {:system #:fhir{:flags #{:MS}}, :value #:fhir{:flags #{:MS}}}}},
+   :telecom {:type zen/vector, :every {:type zen/map, :keys {}}},
    :qualification
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.BackboneElement/schema},
-     :type zen/map,
+    {:type zen/map,
      :keys
      {:code
-      {:confirms #{hl7-fhir-r4-core.CodeableConcept/schema},
-       :type zen/map,
-       :keys
-       {:text
-        {:confirms #{hl7-fhir-r4-core.string/schema},
-         :fhir/flags #{:MS}},
-        :_text {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      {:type zen/map,
+       :keys {:text #:fhir{:flags #{:MS}}},
        :require #{:text},
        :fhir/flags #{:MS}}},
      :require #{:code},

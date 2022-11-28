@@ -1,11 +1,5 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-provenance,
- import
- #{zen.fhir
-   hl7-fhir-r4-core.string
-   hl7-fhir-r4-core.Reference
-   hl7-fhir-r4-core.Element
-   hl7-fhir-r4-core.Signature
-   hl7-fhir-us-core.us-core-provenance},
+ import #{zen.fhir hl7-fhir-us-core.us-core-provenance},
  schema
  {:zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen/desc
@@ -13,7 +7,7 @@
   :zen.fhir/type "Provenance",
   :zen.fhir/profileUri
   "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-provenance",
-  :zen.fhir/version "0.6.3",
+  :zen.fhir/version "0.6.4",
   :confirms
   #{hl7-fhir-us-core.us-core-provenance/schema zen.fhir/Resource},
   :type zen/map,
@@ -21,26 +15,15 @@
   {:target
    {:type zen/vector,
     :every
-    {:confirms #{hl7-fhir-r4-core.Reference/schema zen.fhir/Reference},
-     :type zen/map,
+    {:type zen/map,
      :keys
-     {:reference
-      {:confirms #{hl7-fhir-r4-core.string/schema},
-       :fhir/flags #{:MS}},
+     {:reference #:fhir{:flags #{:MS}},
       :_reference
-      {:confirms #{hl7-fhir-r4-core.Element/schema},
-       :type zen/map,
-       :keys
-       {:value
-        {:confirms #{hl7-fhir-r4-core.string/schema},
-         :fhir/flags #{:MS}},
-        :_value {:confirms #{hl7-fhir-r4-core.Element/schema}}},
+      {:type zen/map,
+       :keys {:value #:fhir{:flags #{:MS}}},
        :require #{:value}}},
      :require #{:reference},
+     :confirms #{zen.fhir/Reference},
      :zen.fhir/reference {:refers #{}}}},
    :occurred #:fhir{:polymorphic true, :flags #{:MS}},
-   :signature
-   {:type zen/vector,
-    :every
-    {:confirms #{hl7-fhir-r4-core.Signature/schema},
-     :fhir/flags #{:MS}}}}}}
+   :signature {:type zen/vector, :every #:fhir{:flags #{:MS}}}}}}
