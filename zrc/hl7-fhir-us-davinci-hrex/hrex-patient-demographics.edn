@@ -6,7 +6,7 @@
    hl7-fhir-r4-core.value-set.administrative-gender
    hl7-fhir-us-core.value-set.birthsex},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -25,7 +25,8 @@
     {:symbol hl7-fhir-us-core.value-set.birthsex/value-set,
      :strength :required}},
    :identifier
-   {:slicing
+   {:type zen/vector,
+    :slicing
     {:slices
      {"umb"
       {:schema {:type zen/vector, :maxItems 1},
@@ -36,9 +37,7 @@
          {:coding
           #{{:system
              "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-             :code "UMB"}}}}}}}},
-    :type zen/vector,
-    :every {}},
+             :code "UMB"}}}}}}}}},
    :name
    {:type zen/vector,
     :every
@@ -46,8 +45,7 @@
      :keys
      {:family #:fhir{:flags #{:MS}},
       :given
-      {:type zen/vector, :every #:fhir{:flags #{:MS}}, :minItems 1},
-      :_given {:type zen/vector, :every {}}},
+      {:type zen/vector, :every #:fhir{:flags #{:MS}}, :minItems 1}},
      :require #{:given :family},
      :fhir/flags #{:MS}},
     :minItems 1},
@@ -63,8 +61,7 @@
     :every
     {:type zen/map,
      :keys
-     {:_line {:type zen/vector, :every {}},
-      :city #:fhir{:flags #{:MS}},
+     {:city #:fhir{:flags #{:MS}},
       :state #:fhir{:flags #{:MS}},
       :line {:type zen/vector, :every #:fhir{:flags #{:MS}}},
       :postalCode #:fhir{:flags #{:MS}},

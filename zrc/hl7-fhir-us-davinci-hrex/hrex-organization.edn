@@ -1,7 +1,7 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-organization,
  import #{zen.fhir hl7-fhir-us-core.us-core-organization},
  schema
- {:zen.fhir/version "0.6.4",
+ {:zen.fhir/version "0.6.5",
   :confirms
   #{hl7-fhir-us-core.us-core-organization/schema zen.fhir/Resource},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -11,5 +11,5 @@
   :type zen/map,
   :zen/desc
   "Additional Da Vinci constraints on organization - to represent either provider organizations or payers",
-  :keys {:identifier {:type zen/vector, :every {}, :minItems 1}},
+  :keys {:identifier {:type zen/vector, :minItems 1}},
   :zen.fhir/type "Organization"}}
