@@ -9,7 +9,7 @@
    hl7-fhir-us-core.us-core-patient
    hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate},
  schema
- {:zen.fhir/version "0.6.5",
+ {:zen.fhir/version "0.6.6",
   :confirms #{zen.fhir/Resource hl7-fhir-r4-core.ClaimResponse/schema},
   :zen/tags #{zen.fhir/profile-schema zen/schema},
   :zen.fhir/profileUri
@@ -51,7 +51,8 @@
        :fhir/extensionUri
        "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedDate",
        :fhir/flags #{:MS}},
-      :serviced #:fhir{:polymorphic true, :flags #{:MS}},
+      :serviced
+      {:fhir/polymorphic true, :type zen/map, :fhir/flags #{:MS}},
       :productOrService #:fhir{:flags #{:MS}},
       :itemTraceNumber
       {:confirms
@@ -60,7 +61,8 @@
        "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemTraceNumber",
        :fhir/flags #{:MS}},
       :quantity #:fhir{:flags #{:MS}},
-      :location #:fhir{:polymorphic true, :flags #{:MS}},
+      :location
+      {:fhir/polymorphic true, :type zen/map, :fhir/flags #{:MS}},
       :unitPrice #:fhir{:flags #{:MS}},
       :preAuthIssueDate
       {:confirms
