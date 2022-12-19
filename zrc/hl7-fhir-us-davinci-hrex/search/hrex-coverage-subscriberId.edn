@@ -1,15 +1,12 @@
 {ns hl7-fhir-us-davinci-hrex.search.hrex-coverage-subscriberId,
  import #{zen.fhir},
- search
- {:zen/tags #{zen.fhir/search},
-  :fhir/id "hrex-coverage-subscriberId",
-  :fhir/url
-  "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-subscriberId",
-  :fhir/type "token",
-  :name "subscriber-id",
-  :expr
-  {:Coverage
-   {:knife [["subscriberId"]],
-    :jsonpath ["$.\"subscriberId\"[*]"],
-    :data-types #{{:type "string", :polymorphic? false}},
-    :template :token}}}}
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "hrex-coverage-subscriberId",
+         :fhir/url "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-subscriberId",
+         :fhir/type "token",
+         :name "subscriber-id",
+         :expr {:Coverage {:knife [["subscriberId"]],
+                           :jsonpath ["$.\"subscriberId\"[*]"],
+                           :data-types #{{:type "string",
+                                          :polymorphic? false}},
+                           :template :token}}}}

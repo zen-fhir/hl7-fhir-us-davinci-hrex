@@ -1,15 +1,12 @@
 {ns hl7-fhir-us-davinci-hrex.search.hrex-coverage-payor,
  import #{zen.fhir},
- search
- {:zen/tags #{zen.fhir/search},
-  :fhir/id "hrex-coverage-payor",
-  :fhir/url
-  "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-payor",
-  :fhir/type "reference",
-  :name "payor",
-  :expr
-  {:Coverage
-   {:knife [["payor"]],
-    :jsonpath ["$.\"payor\"[*]"],
-    :data-types #{{:type "Reference", :polymorphic? false}},
-    :template :reference}}}}
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "hrex-coverage-payor",
+         :fhir/url "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-coverage-payor",
+         :fhir/type "reference",
+         :name "payor",
+         :expr {:Coverage {:knife [["payor"]],
+                           :jsonpath ["$.\"payor\"[*]"],
+                           :data-types #{{:type "Reference",
+                                          :polymorphic? false}},
+                           :template :reference}}}}

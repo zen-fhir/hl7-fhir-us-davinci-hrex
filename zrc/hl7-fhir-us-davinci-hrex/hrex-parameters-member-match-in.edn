@@ -1,86 +1,66 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-parameters-member-match-in,
- import
- #{zen.fhir
-   hl7-fhir-us-davinci-hrex.hrex-coverage
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-r4-core.Parameters
-   hl7-fhir-us-davinci-hrex.hrex-consent},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Parameters/schema},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-parameters-member-match-in",
-  :require #{:parameter},
-  :type zen/map,
-  :zen/desc
-  "The Parameters profile for Da Vinci Find Member using Patient and Coverage Resources Request. The resource must contain: \n * MemberPatient - US Core Patient containing member demographics \n  * CoverageToMatch - details of prior health plan coverage provided by the member, typically from their health plan coverage card \n  * CoverageToLink - details of new or prospective health plan coverage, provided by the health plan based upon the member's enrolment",
-  :keys
-  {:parameter
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"memberPatient"
-      {:schema
-       {:type zen/vector,
-        :minItems 1,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:name {:const {:value "MemberPatient"}, :fhir/flags #{:MS}},
-          :resource
-          {:confirms #{hl7-fhir-us-core.us-core-patient/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "MemberPatient"}}},
-      "CoverageToMatch"
-      {:schema
-       {:type zen/vector,
-        :minItems 1,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:name
-          {:const {:value "CoverageToMatch"}, :fhir/flags #{:MS}},
-          :resource
-          {:confirms #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "CoverageToMatch"}}},
-      "CoverageToLink"
-      {:schema
-       {:type zen/vector,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:name {:const {:value "CoverageToLink"}, :fhir/flags #{:MS}},
-          :resource
-          {:confirms #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "CoverageToLink"}}},
-      "Consent"
-      {:schema
-       {:type zen/vector,
-        :minItems 1,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:name {:const {:value "Consent"}, :fhir/flags #{:MS}},
-          :resource
-          {:confirms #{hl7-fhir-us-davinci-hrex.hrex-consent/schema},
-           :fhir/flags #{:MS},
-           :zen.fhir/nested {}}},
-         :require #{:resource}}},
-       :filter {:engine :match, :match {:name "Consent"}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 3,
-    :maxItems 4}},
-  :zen.fhir/type "Parameters"}}
+ import #{zen.fhir
+          hl7-fhir-us-davinci-hrex.hrex-coverage
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-r4-core.Parameters
+          hl7-fhir-us-davinci-hrex.hrex-consent},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4-core.Parameters/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-parameters-member-match-in",
+         :require #{:parameter},
+         :type zen/map,
+         :zen/desc "The Parameters profile for Da Vinci Find Member using Patient and Coverage Resources Request. The resource must contain: \n * MemberPatient - US Core Patient containing member demographics \n  * CoverageToMatch - details of prior health plan coverage provided by the member, typically from their health plan coverage card \n  * CoverageToLink - details of new or prospective health plan coverage, provided by the health plan based upon the member's enrolment",
+         :keys {:parameter {:type zen/vector,
+                            :slicing {:slices {"memberPatient" {:schema {:type zen/vector,
+                                                                         :minItems 1,
+                                                                         :maxItems 1,
+                                                                         :every {:type zen/map,
+                                                                                 :keys {:name {:const {:value "MemberPatient"},
+                                                                                               :fhir/flags #{:MS}},
+                                                                                        :resource {:confirms #{hl7-fhir-us-core.us-core-patient/schema},
+                                                                                                   :fhir/flags #{:MS},
+                                                                                                   :zen.fhir/nested {}}},
+                                                                                 :require #{:resource}}},
+                                                                :filter {:engine :match,
+                                                                         :match {:name "MemberPatient"}}},
+                                               "CoverageToMatch" {:schema {:type zen/vector,
+                                                                           :minItems 1,
+                                                                           :maxItems 1,
+                                                                           :every {:type zen/map,
+                                                                                   :keys {:name {:const {:value "CoverageToMatch"},
+                                                                                                 :fhir/flags #{:MS}},
+                                                                                          :resource {:confirms #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema},
+                                                                                                     :fhir/flags #{:MS},
+                                                                                                     :zen.fhir/nested {}}},
+                                                                                   :require #{:resource}}},
+                                                                  :filter {:engine :match,
+                                                                           :match {:name "CoverageToMatch"}}},
+                                               "CoverageToLink" {:schema {:type zen/vector,
+                                                                          :maxItems 1,
+                                                                          :every {:type zen/map,
+                                                                                  :keys {:name {:const {:value "CoverageToLink"},
+                                                                                                :fhir/flags #{:MS}},
+                                                                                         :resource {:confirms #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema},
+                                                                                                    :fhir/flags #{:MS},
+                                                                                                    :zen.fhir/nested {}}},
+                                                                                  :require #{:resource}}},
+                                                                 :filter {:engine :match,
+                                                                          :match {:name "CoverageToLink"}}},
+                                               "Consent" {:schema {:type zen/vector,
+                                                                   :minItems 1,
+                                                                   :maxItems 1,
+                                                                   :every {:type zen/map,
+                                                                           :keys {:name {:const {:value "Consent"},
+                                                                                         :fhir/flags #{:MS}},
+                                                                                  :resource {:confirms #{hl7-fhir-us-davinci-hrex.hrex-consent/schema},
+                                                                                             :fhir/flags #{:MS},
+                                                                                             :zen.fhir/nested {}}},
+                                                                           :require #{:resource}}},
+                                                          :filter {:engine :match,
+                                                                   :match {:name "Consent"}}}}},
+                            :every {:fhir/flags #{:MS}},
+                            :minItems 3,
+                            :maxItems 4}},
+         :zen.fhir/type "Parameters"}}

@@ -1,27 +1,17 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-practitionerrole,
- import
- #{hl7-fhir-us-davinci-hrex.hrex-practitioner
-   zen.fhir
-   hl7-fhir-us-davinci-hrex.hrex-organization
-   hl7-fhir-us-core.us-core-practitionerrole},
- schema
- {:zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen/desc
-  "Constraints on the US Core PractitionerRole requiring the use of Da Vinci Organization and Practitioner",
-  :zen.fhir/type "PractitionerRole",
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitionerrole",
-  :zen.fhir/version "0.6.6-7",
-  :confirms
-  #{hl7-fhir-us-core.us-core-practitionerrole/schema
-    zen.fhir/Resource},
-  :type zen/map,
-  :keys
-  {:practitioner
-   {:confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-davinci-hrex.hrex-practitioner/schema}}},
-   :organization
-   {:confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-davinci-hrex.hrex-organization/schema}}}}}}
+ import #{hl7-fhir-us-davinci-hrex.hrex-practitioner
+          zen.fhir
+          hl7-fhir-us-davinci-hrex.hrex-organization
+          hl7-fhir-us-core.us-core-practitionerrole},
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Constraints on the US Core PractitionerRole requiring the use of Da Vinci Organization and Practitioner",
+         :zen.fhir/type "PractitionerRole",
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitionerrole",
+         :zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-us-core.us-core-practitionerrole/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:practitioner {:confirms #{zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-us-davinci-hrex.hrex-practitioner/schema}}},
+                :organization {:confirms #{zen.fhir/Reference},
+                               :zen.fhir/reference {:refers #{hl7-fhir-us-davinci-hrex.hrex-organization/schema}}}}}}

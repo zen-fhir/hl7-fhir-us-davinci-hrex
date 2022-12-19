@@ -1,32 +1,22 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-practitioner,
  import #{zen.fhir hl7-fhir-us-core.us-core-practitioner},
- schema
- {:zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen/desc
-  "Constraints on the US Core Practitioner profiles requiring support for qualification and requiring support for an additional identifier type",
-  :zen.fhir/type "Practitioner",
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitioner",
-  :zen.fhir/version "0.6.6-7",
-  :confirms
-  #{hl7-fhir-us-core.us-core-practitioner/schema zen.fhir/Resource},
-  :type zen/map,
-  :keys
-  {:identifier
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:system #:fhir{:flags #{:MS}}, :value #:fhir{:flags #{:MS}}}}},
-   :qualification
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:code
-      {:type zen/map,
-       :keys {:text #:fhir{:flags #{:MS}}},
-       :require #{:text},
-       :fhir/flags #{:MS}}},
-     :require #{:code},
-     :fhir/flags #{:MS}}}}}}
+ schema {:zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen/desc "Constraints on the US Core Practitioner profiles requiring support for qualification and requiring support for an additional identifier type",
+         :zen.fhir/type "Practitioner",
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitioner",
+         :zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-us-core.us-core-practitioner/schema
+                     zen.fhir/Resource},
+         :type zen/map,
+         :keys {:identifier {:type zen/vector,
+                             :every {:type zen/map,
+                                     :keys {:system {:fhir/flags #{:MS}},
+                                            :value {:fhir/flags #{:MS}}}}},
+                :qualification {:type zen/vector,
+                                :every {:type zen/map,
+                                        :keys {:code {:type zen/map,
+                                                      :keys {:text {:fhir/flags #{:MS}}},
+                                                      :require #{:text},
+                                                      :fhir/flags #{:MS}}},
+                                        :require #{:code},
+                                        :fhir/flags #{:MS}}}}}}

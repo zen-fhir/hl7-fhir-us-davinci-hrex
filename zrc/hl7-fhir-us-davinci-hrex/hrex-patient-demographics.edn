@@ -1,70 +1,48 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-patient-demographics,
- import
- #{hl7-fhir-us-core.us-core-birthsex
-   zen.fhir
-   hl7-fhir-r4-core.Patient
-   hl7-fhir-r4-core.value-set.administrative-gender
-   hl7-fhir-us-core.value-set.birthsex},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{hl7-fhir-r4-core.Patient/schema zen.fhir/Resource},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-patient-demographics",
-  :require #{:name :birthDate},
-  :type zen/map,
-  :zen/desc
-  "Defines constraints on the patient resource for the minimal set of data to query and retrieve patient demographic information.",
-  :keys
-  {:birthSex
-   {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
-    :fhir/extensionUri
-    "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex",
-    :fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol hl7-fhir-us-core.value-set.birthsex/value-set,
-     :strength :required}},
-   :identifier
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"umb"
-      {:schema {:type zen/vector, :maxItems 1},
-       :filter
-       {:engine :match,
-        :match
-        {:type
-         {:coding
-          #{{:system
-             "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-             :code "UMB"}}}}}}}}},
-   :name
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:family #:fhir{:flags #{:MS}},
-      :given
-      {:type zen/vector, :every #:fhir{:flags #{:MS}}, :minItems 1}},
-     :require #{:given :family},
-     :fhir/flags #{:MS}},
-    :minItems 1},
-   :gender
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-r4-core.value-set.administrative-gender/value-set,
-     :strength :required}},
-   :birthDate #:fhir{:flags #{:MS}},
-   :address
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:city #:fhir{:flags #{:MS}},
-      :state #:fhir{:flags #{:MS}},
-      :line {:type zen/vector, :every #:fhir{:flags #{:MS}}},
-      :postalCode #:fhir{:flags #{:MS}},
-      :period #:fhir{:flags #{:MS}}},
-     :fhir/flags #{:MS}}}},
-  :zen.fhir/type "Patient"}}
+ import #{hl7-fhir-us-core.us-core-birthsex
+          zen.fhir
+          hl7-fhir-r4-core.Patient
+          hl7-fhir-r4-core.value-set.administrative-gender
+          hl7-fhir-us-core.value-set.birthsex},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{hl7-fhir-r4-core.Patient/schema
+                     zen.fhir/Resource},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-patient-demographics",
+         :require #{:name :birthDate},
+         :type zen/map,
+         :zen/desc "Defines constraints on the patient resource for the minimal set of data to query and retrieve patient demographic information.",
+         :keys {:birthSex {:confirms #{hl7-fhir-us-core.us-core-birthsex/schema},
+                           :fhir/extensionUri "http://hl7.org/fhir/us/core/StructureDefinition/us-core-birthsex",
+                           :fhir/flags #{:MS},
+                           :zen.fhir/value-set {:symbol hl7-fhir-us-core.value-set.birthsex/value-set,
+                                                :strength :required}},
+                :identifier {:type zen/vector,
+                             :slicing {:slices {"umb" {:schema {:type zen/vector,
+                                                                :maxItems 1},
+                                                       :filter {:engine :match,
+                                                                :match {:type {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                          :code "UMB"}}}}}}}}},
+                :name {:type zen/vector,
+                       :every {:type zen/map,
+                               :keys {:family {:fhir/flags #{:MS}},
+                                      :given {:type zen/vector,
+                                              :every {:fhir/flags #{:MS}},
+                                              :minItems 1}},
+                               :require #{:given :family},
+                               :fhir/flags #{:MS}},
+                       :minItems 1},
+                :gender {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-r4-core.value-set.administrative-gender/value-set,
+                                              :strength :required}},
+                :birthDate {:fhir/flags #{:MS}},
+                :address {:type zen/vector,
+                          :every {:type zen/map,
+                                  :keys {:city {:fhir/flags #{:MS}},
+                                         :state {:fhir/flags #{:MS}},
+                                         :line {:type zen/vector,
+                                                :every {:fhir/flags #{:MS}}},
+                                         :postalCode {:fhir/flags #{:MS}},
+                                         :period {:fhir/flags #{:MS}}},
+                                  :fhir/flags #{:MS}}}},
+         :zen.fhir/type "Patient"}}

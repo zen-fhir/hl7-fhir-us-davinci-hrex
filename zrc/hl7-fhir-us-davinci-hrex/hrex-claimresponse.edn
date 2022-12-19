@@ -1,80 +1,59 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-claimresponse,
- import
- #{zen.fhir
-   hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider
-   hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate
-   hl7-fhir-us-core.us-core-organization
-   hl7-fhir-r4-core.ClaimResponse
-   hl7-fhir-us-davinci-hrex.extension-itemTraceNumber
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.ClaimResponse/schema},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-claimresponse",
-  :require #{:preAuthRef},
-  :type zen/map,
-  :zen/desc
-  "This profile specifies constraints on ClaimResponse resource to reflect the contents of a pro-active prior authorization returned via a card",
-  :keys
-  {:patient
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
-   :preAuthRef {:fhir/flags #{:MS}, :zen/desc "PA Number/Identifier"},
-   :use #:fhir{:flags #{:MS}},
-   :type #:fhir{:flags #{:MS}},
-   :created #:fhir{:flags #{:MS}},
-   :preAuthPeriod
-   {:fhir/flags #{:MS},
-    :zen/desc
-    "Certification Effective Date and Certification End Date"},
-   :outcome #:fhir{:flags #{:MS}},
-   :insurer
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
-   :status {:const {:value "active"}},
-   :addItem
-   {:type zen/vector,
-    :every
-    {:type zen/map,
-     :keys
-     {:modifier {:type zen/vector, :every #:fhir{:flags #{:MS}}},
-      :authorizedDate
-      {:confirms
-       #{hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate/schema},
-       :fhir/extensionUri
-       "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedDate",
-       :fhir/flags #{:MS}},
-      :serviced
-      {:fhir/polymorphic true, :type zen/map, :fhir/flags #{:MS}},
-      :productOrService #:fhir{:flags #{:MS}},
-      :itemTraceNumber
-      {:confirms
-       #{hl7-fhir-us-davinci-hrex.extension-itemTraceNumber/schema},
-       :fhir/extensionUri
-       "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemTraceNumber",
-       :fhir/flags #{:MS}},
-      :quantity #:fhir{:flags #{:MS}},
-      :location
-      {:fhir/polymorphic true, :type zen/map, :fhir/flags #{:MS}},
-      :unitPrice #:fhir{:flags #{:MS}},
-      :preAuthIssueDate
-      {:confirms
-       #{hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate/schema},
-       :fhir/extensionUri
-       "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemPreAuthIssueDate",
-       :fhir/flags #{:MS}},
-      :authorizedProvider
-      {:confirms
-       #{hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider/schema},
-       :fhir/extensionUri
-       "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedProvider",
-       :fhir/flags #{:MS}}},
-     :fhir/flags #{:MS}}}},
-  :zen.fhir/type "ClaimResponse"}}
+ import #{zen.fhir
+          hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider
+          hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate
+          hl7-fhir-us-core.us-core-organization
+          hl7-fhir-r4-core.ClaimResponse
+          hl7-fhir-us-davinci-hrex.extension-itemTraceNumber
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{zen.fhir/Resource
+                     hl7-fhir-r4-core.ClaimResponse/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-claimresponse",
+         :require #{:preAuthRef},
+         :type zen/map,
+         :zen/desc "This profile specifies constraints on ClaimResponse resource to reflect the contents of a pro-active prior authorization returned via a card",
+         :keys {:patient {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}}},
+                :preAuthRef {:fhir/flags #{:MS},
+                             :zen/desc "PA Number/Identifier"},
+                :use {:fhir/flags #{:MS}},
+                :type {:fhir/flags #{:MS}},
+                :created {:fhir/flags #{:MS}},
+                :preAuthPeriod {:fhir/flags #{:MS},
+                                :zen/desc "Certification Effective Date and Certification End Date"},
+                :outcome {:fhir/flags #{:MS}},
+                :insurer {:fhir/flags #{:MS},
+                          :confirms #{zen.fhir/Reference},
+                          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema}}},
+                :status {:const {:value "active"}},
+                :addItem {:type zen/vector,
+                          :every {:type zen/map,
+                                  :keys {:modifier {:type zen/vector,
+                                                    :every {:fhir/flags #{:MS}}},
+                                         :authorizedDate {:confirms #{hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate/schema},
+                                                          :fhir/extensionUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedDate",
+                                                          :fhir/flags #{:MS}},
+                                         :serviced {:fhir/polymorphic true,
+                                                    :type zen/map,
+                                                    :fhir/flags #{:MS}},
+                                         :productOrService {:fhir/flags #{:MS}},
+                                         :itemTraceNumber {:confirms #{hl7-fhir-us-davinci-hrex.extension-itemTraceNumber/schema},
+                                                           :fhir/extensionUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemTraceNumber",
+                                                           :fhir/flags #{:MS}},
+                                         :quantity {:fhir/flags #{:MS}},
+                                         :location {:fhir/polymorphic true,
+                                                    :type zen/map,
+                                                    :fhir/flags #{:MS}},
+                                         :unitPrice {:fhir/flags #{:MS}},
+                                         :preAuthIssueDate {:confirms #{hl7-fhir-us-davinci-hrex.extension-itemPreAuthIssueDate/schema},
+                                                            :fhir/extensionUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemPreAuthIssueDate",
+                                                            :fhir/flags #{:MS}},
+                                         :authorizedProvider {:confirms #{hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider/schema},
+                                                              :fhir/extensionUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedProvider",
+                                                              :fhir/flags #{:MS}}},
+                                  :fhir/flags #{:MS}}}},
+         :zen.fhir/type "ClaimResponse"}}

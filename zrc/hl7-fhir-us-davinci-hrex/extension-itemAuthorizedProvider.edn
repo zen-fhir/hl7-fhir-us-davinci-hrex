@@ -1,18 +1,12 @@
 {ns hl7-fhir-us-davinci-hrex.extension-itemAuthorizedProvider,
- import
- #{zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-core.us-core-organization},
- schema
- {:zen/tags #{zen/schema zen.fhir/structure-schema},
-  :zen/desc
-  "The specific provider who has been authorized to provide this item.",
-  :zen.fhir/type "Reference",
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedProvider",
-  :zen.fhir/version "0.6.6-7",
-  :confirms #{zen.fhir/Reference},
-  :zen.fhir/reference
-  {:refers
-   #{hl7-fhir-us-core.us-core-organization/schema
-     hl7-fhir-us-core.us-core-practitioner/schema}}}}
+ import #{zen.fhir
+          hl7-fhir-us-core.us-core-practitioner
+          hl7-fhir-us-core.us-core-organization},
+ schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen/desc "The specific provider who has been authorized to provide this item.",
+         :zen.fhir/type "Reference",
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedProvider",
+         :zen.fhir/version "0.6.6-8",
+         :confirms #{zen.fhir/Reference},
+         :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
+                                        hl7-fhir-us-core.us-core-practitioner/schema}}}}

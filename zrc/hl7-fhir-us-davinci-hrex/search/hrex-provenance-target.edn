@@ -1,15 +1,12 @@
 {ns hl7-fhir-us-davinci-hrex.search.hrex-provenance-target,
  import #{zen.fhir},
- search
- {:zen/tags #{zen.fhir/search},
-  :fhir/id "hrex-provenance-target",
-  :fhir/url
-  "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-provenance-target",
-  :fhir/type "reference",
-  :name "target",
-  :expr
-  {:Provenance
-   {:knife [["target"]],
-    :jsonpath ["$.\"target\"[*]"],
-    :data-types #{{:type "Reference", :polymorphic? false}},
-    :template :reference}}}}
+ search {:zen/tags #{zen.fhir/search},
+         :fhir/id "hrex-provenance-target",
+         :fhir/url "http://hl7.org/fhir/us/davinci-hrex/SearchParameter/hrex-provenance-target",
+         :fhir/type "reference",
+         :name "target",
+         :expr {:Provenance {:knife [["target"]],
+                             :jsonpath ["$.\"target\"[*]"],
+                             :data-types #{{:type "Reference",
+                                            :polymorphic? false}},
+                             :template :reference}}}}

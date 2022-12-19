@@ -1,188 +1,109 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-task-data-request,
- import
- #{zen.fhir
-   hl7-fhir-us-core.us-core-practitioner
-   hl7-fhir-us-davinci-hrex.hrex-coverage
-   hl7-fhir-us-core.us-core-organization
-   hl7-fhir-us-core.us-core-patient
-   hl7-fhir-us-davinci-hrex.value-set.hrex-task-status
-   hl7-fhir-r4-core.Task
-   hl7-fhir-r4-core.Claim},
- schema
- {:zen.fhir/version "0.6.6-7",
-  :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Task/schema},
-  :zen/tags #{zen.fhir/profile-schema zen/schema},
-  :zen.fhir/profileUri
-  "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-task-data-request",
-  :require #{:authoredOn :for :requester :code :input :owner},
-  :type zen/map,
-  :zen/desc
-  "This Task profile is used to solicit information from a system when direct query is not possible and human intervention might be required",
-  :keys
-  {:reasonCode
-   {:type zen/map,
-    :keys {:text #:fhir{:flags #{:MS}}},
-    :require #{:text},
-    :fhir/flags #{:MS}},
-   :statusReason
-   {:type zen/map,
-    :keys {:text #:fhir{:flags #{:MS}}},
-    :require #{:text},
-    :fhir/flags #{:MS}},
-   :authoredOn #:fhir{:flags #{:MS}},
-   :output
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"data"
-      {:schema
-       {:type zen/vector,
-        :every
-        {:type zen/map,
-         :keys
-         {:type
-          {:match
-           {:coding
-            #{{:system
-               "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-               :code "data-value"}}},
-           :fhir/flags #{:MS}},
-          :value
-          {:fhir/polymorphic true,
-           :type zen/map,
-           :keys
-           {:Reference
-            {:confirms #{zen.fhir/Reference},
-             :zen.fhir/reference {:refers #{}}}},
-           :fhir/flags #{:MS},
-           :zen/desc "data reference"}}}},
-       :filter
-       {:engine :match,
-        :match
-        {:type
-         {:coding
-          #{{:system
-             "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-             :code "data-value"}}}}}}}},
-    :every #:fhir{:flags #{:MS}}},
-   :businessStatus
-   {:type zen/map,
-    :keys {:text #:fhir{:flags #{:MS}}},
-    :require #{:text},
-    :fhir/flags #{:MS},
-    :zen/desc "E.g. 'waiting on internal review'"},
-   :for
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers #{hl7-fhir-us-core.us-core-patient/schema}},
-    :zen/desc "Member being queried"},
-   :requester
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers
-     #{hl7-fhir-us-core.us-core-organization/schema
-       hl7-fhir-us-core.us-core-practitioner/schema}},
-    :zen/desc "Who is asking for data"},
-   :status
-   {:fhir/flags #{:MS},
-    :zen.fhir/value-set
-    {:symbol
-     hl7-fhir-us-davinci-hrex.value-set.hrex-task-status/value-set,
-     :strength :required}},
-   :code
-   {:match
-    {:coding
-     #{{:system
-        "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-        :code "data-request"}}},
-    :fhir/flags #{:MS}},
-   :intent {:const {:value "order"}, :fhir/flags #{:MS}},
-   :focus
-   {:confirms #{zen.fhir/Reference},
-    :zen.fhir/reference {:refers #{}},
-    :zen/desc "What task is acting on"},
-   :input
-   {:type zen/vector,
-    :slicing
-    {:slices
-     {"query"
-      {:schema
-       {:type zen/vector,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:type
-          {:match
-           {:coding
-            #{{:system
-               "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-               :code "data-query"}}},
-           :fhir/flags #{:MS}},
-          :value
-          {:fhir/polymorphic true,
-           :type zen/map,
-           :fhir/flags #{:MS},
-           :zen/desc "query value"}}}},
-       :filter
-       {:engine :match,
-        :match
-        {:type
-         {:coding
-          #{{:system
-             "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-             :code "data-query"}}}}}},
-      "code"
-      {:schema
-       {:type zen/vector,
-        :maxItems 1,
-        :every
-        {:type zen/map,
-         :keys
-         {:type
-          {:match
-           {:coding
-            #{{:system
-               "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-               :code "data-code"}}},
-           :fhir/flags #{:MS}},
-          :value
-          {:fhir/polymorphic true,
-           :type zen/map,
-           :fhir/flags #{:MS},
-           :zen/desc "query value"}}}},
-       :filter
-       {:engine :match,
-        :match
-        {:type
-         {:coding
-          #{{:system
-             "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
-             :code "data-code"}}}}}}}},
-    :every #:fhir{:flags #{:MS}},
-    :minItems 1},
-   :basedOn
-   {:type zen/vector,
-    :every
-    {:fhir/flags #{:MS},
-     :confirms #{zen.fhir/Reference},
-     :zen.fhir/reference {:refers #{}},
-     :zen/desc "Authorization for data request"}},
-   :owner
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers
-     #{hl7-fhir-us-core.us-core-organization/schema
-       hl7-fhir-us-core.us-core-practitioner/schema}},
-    :zen/desc "Who is being asked for data"},
-   :reasonReference
-   {:fhir/flags #{:MS},
-    :confirms #{zen.fhir/Reference},
-    :zen.fhir/reference
-    {:refers
-     #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema
-       hl7-fhir-r4-core.Claim/schema}}}},
-  :zen.fhir/type "Task"}}
+ import #{zen.fhir
+          hl7-fhir-us-core.us-core-practitioner
+          hl7-fhir-us-davinci-hrex.hrex-coverage
+          hl7-fhir-us-core.us-core-organization
+          hl7-fhir-us-core.us-core-patient
+          hl7-fhir-us-davinci-hrex.value-set.hrex-task-status
+          hl7-fhir-r4-core.Task
+          hl7-fhir-r4-core.Claim},
+ schema {:zen.fhir/version "0.6.6-8",
+         :confirms #{zen.fhir/Resource hl7-fhir-r4-core.Task/schema},
+         :zen/tags #{zen.fhir/profile-schema zen/schema},
+         :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-task-data-request",
+         :require #{:authoredOn :for :requester :code :input :owner},
+         :type zen/map,
+         :zen/desc "This Task profile is used to solicit information from a system when direct query is not possible and human intervention might be required",
+         :keys {:reasonCode {:type zen/map,
+                             :keys {:text {:fhir/flags #{:MS}}},
+                             :require #{:text},
+                             :fhir/flags #{:MS}},
+                :statusReason {:type zen/map,
+                               :keys {:text {:fhir/flags #{:MS}}},
+                               :require #{:text},
+                               :fhir/flags #{:MS}},
+                :authoredOn {:fhir/flags #{:MS}},
+                :output {:type zen/vector,
+                         :slicing {:slices {"data" {:schema {:type zen/vector,
+                                                             :every {:type zen/map,
+                                                                     :keys {:type {:match {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                                      :code "data-value"}}},
+                                                                                   :fhir/flags #{:MS}},
+                                                                            :value {:fhir/polymorphic true,
+                                                                                    :type zen/map,
+                                                                                    :keys {:Reference {:confirms #{zen.fhir/Reference},
+                                                                                                       :zen.fhir/reference {:refers #{}}}},
+                                                                                    :fhir/flags #{:MS},
+                                                                                    :zen/desc "data reference"}}}},
+                                                    :filter {:engine :match,
+                                                             :match {:type {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                       :code "data-value"}}}}}}}},
+                         :every {:fhir/flags #{:MS}}},
+                :businessStatus {:type zen/map,
+                                 :keys {:text {:fhir/flags #{:MS}}},
+                                 :require #{:text},
+                                 :fhir/flags #{:MS},
+                                 :zen/desc "E.g. 'waiting on internal review'"},
+                :for {:fhir/flags #{:MS},
+                      :confirms #{zen.fhir/Reference},
+                      :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-patient/schema}},
+                      :zen/desc "Member being queried"},
+                :requester {:fhir/flags #{:MS},
+                            :confirms #{zen.fhir/Reference},
+                            :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
+                                                           hl7-fhir-us-core.us-core-practitioner/schema}},
+                            :zen/desc "Who is asking for data"},
+                :status {:fhir/flags #{:MS},
+                         :zen.fhir/value-set {:symbol hl7-fhir-us-davinci-hrex.value-set.hrex-task-status/value-set,
+                                              :strength :required}},
+                :code {:match {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                          :code "data-request"}}},
+                       :fhir/flags #{:MS}},
+                :intent {:const {:value "order"}, :fhir/flags #{:MS}},
+                :focus {:confirms #{zen.fhir/Reference},
+                        :zen.fhir/reference {:refers #{}},
+                        :zen/desc "What task is acting on"},
+                :input {:type zen/vector,
+                        :slicing {:slices {"query" {:schema {:type zen/vector,
+                                                             :maxItems 1,
+                                                             :every {:type zen/map,
+                                                                     :keys {:type {:match {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                                      :code "data-query"}}},
+                                                                                   :fhir/flags #{:MS}},
+                                                                            :value {:fhir/polymorphic true,
+                                                                                    :type zen/map,
+                                                                                    :fhir/flags #{:MS},
+                                                                                    :zen/desc "query value"}}}},
+                                                    :filter {:engine :match,
+                                                             :match {:type {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                       :code "data-query"}}}}}},
+                                           "code" {:schema {:type zen/vector,
+                                                            :maxItems 1,
+                                                            :every {:type zen/map,
+                                                                    :keys {:type {:match {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                                     :code "data-code"}}},
+                                                                                  :fhir/flags #{:MS}},
+                                                                           :value {:fhir/polymorphic true,
+                                                                                   :type zen/map,
+                                                                                   :fhir/flags #{:MS},
+                                                                                   :zen/desc "query value"}}}},
+                                                   :filter {:engine :match,
+                                                            :match {:type {:coding #{{:system "http://hl7.org/fhir/us/davinci-hrex/CodeSystem/hrex-temp",
+                                                                                      :code "data-code"}}}}}}}},
+                        :every {:fhir/flags #{:MS}},
+                        :minItems 1},
+                :basedOn {:type zen/vector,
+                          :every {:fhir/flags #{:MS},
+                                  :confirms #{zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{}},
+                                  :zen/desc "Authorization for data request"}},
+                :owner {:fhir/flags #{:MS},
+                        :confirms #{zen.fhir/Reference},
+                        :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
+                                                       hl7-fhir-us-core.us-core-practitioner/schema}},
+                        :zen/desc "Who is being asked for data"},
+                :reasonReference {:fhir/flags #{:MS},
+                                  :confirms #{zen.fhir/Reference},
+                                  :zen.fhir/reference {:refers #{hl7-fhir-us-davinci-hrex.hrex-coverage/schema
+                                                                 hl7-fhir-r4-core.Claim/schema}}}},
+         :zen.fhir/type "Task"}}
