@@ -8,7 +8,7 @@
           hl7-fhir-r4-core.DocumentReference
           hl7-fhir-us-davinci-hrex.hrex-organization
           hl7-fhir-us-core.us-core-practitionerrole},
- schema {:zen.fhir/version "0.6.7-2",
+ schema {:zen.fhir/version "0.6.7-3",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4-core.Consent/schema},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
