@@ -4,5 +4,5 @@
          :zen/desc "Uniquely identifies this claim item. (2000F-TRN)",
          :zen.fhir/type "Identifier",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemTraceNumber",
-         :zen.fhir/version "0.6.8",
+         :zen.fhir/version "0.6.9",
          :confirms #{hl7-fhir-r4-core.Identifier/schema}}}
