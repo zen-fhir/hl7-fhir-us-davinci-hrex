@@ -7,7 +7,7 @@
          :zen/desc "Constraints on the US Core PractitionerRole requiring the use of Da Vinci Organization and Practitioner",
          :zen.fhir/type "PractitionerRole",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-practitionerrole",
-         :zen.fhir/version "0.6.9",
+         :zen.fhir/version "0.6.10",
          :confirms #{hl7-fhir-us-core.us-core-practitionerrole/schema
                      zen.fhir/Resource},
          :type zen/map,
