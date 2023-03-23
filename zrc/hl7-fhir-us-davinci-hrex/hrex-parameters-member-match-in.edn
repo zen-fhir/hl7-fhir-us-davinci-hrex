@@ -1,10 +1,14 @@
 {ns hl7-fhir-us-davinci-hrex.hrex-parameters-member-match-in,
- import #{zen.fhir
+ import #{hl7-fhir-us-davinci-hrex.hrex-parameters-member-match-in
+          zen.fhir
           hl7-fhir-us-davinci-hrex.hrex-coverage
           hl7-fhir-us-core.us-core-patient
           hl7-fhir-r4-core.Parameters
           hl7-fhir-us-davinci-hrex.hrex-consent},
- schema {:zen.fhir/version "0.6.18-1",
+ parameter-schema {:zen/tags #{zen/schema zen.fhir/structure-schema},
+                   :zen.fhir/version "0.6.19",
+                   :fhir/flags #{:MS}},
+ schema {:zen.fhir/version "0.6.19",
          :confirms #{zen.fhir/Resource
                      hl7-fhir-r4-core.Parameters/schema},
          :zen/tags #{zen.fhir/profile-schema zen/schema},
@@ -60,7 +64,7 @@
                                                                            :require #{:resource}}},
                                                           :filter {:engine :match,
                                                                    :match {:name "Consent"}}}}},
-                            :every {:fhir/flags #{:MS}},
+                            :every {:confirms #{hl7-fhir-us-davinci-hrex.hrex-parameters-member-match-in/parameter-schema}},
                             :minItems 3,
                             :maxItems 4}},
          :zen.fhir/type "Parameters"}}
