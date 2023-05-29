@@ -6,7 +6,7 @@
          :zen/desc "The specific provider who has been authorized to provide this item.",
          :zen.fhir/type "Reference",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedProvider",
-         :zen.fhir/version "0.6.25-1",
+         :zen.fhir/version "0.6.27",
          :confirms #{zen.fhir/Reference},
          :zen.fhir/reference {:refers #{hl7-fhir-us-core.us-core-organization/schema
                                         hl7-fhir-us-core.us-core-practitioner/schema}}}}
