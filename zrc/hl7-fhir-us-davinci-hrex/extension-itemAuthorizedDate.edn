@@ -1,8 +1,10 @@
 {ns hl7-fhir-us-davinci-hrex.extension-itemAuthorizedDate,
  import #{hl7-fhir-r4-core.Period zen.fhir hl7-fhir-r4-core.dateTime},
  schema {:fhir/polymorphic true,
-         :zen.fhir/version "0.6.27",
-         :zen/tags #{zen/schema zen.fhir/structure-schema},
+         :zen.fhir/version "0.6.28",
+         :zen/tags #{zen.fhir/extension
+                     zen/schema
+                     zen.fhir/structure-schema},
          :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/extension-itemAuthorizedDate",
          :type zen/map,
          :zen/desc "The date/period by which the item that is pre-authorized must be completed.",
