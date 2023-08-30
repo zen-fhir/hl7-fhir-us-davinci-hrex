@@ -4,7 +4,7 @@
          :zen/desc "Additional constraints on US Core Provenance to ensure it meets payer needs, including indicating when the event occurred and retaining signatures if present",
          :zen.fhir/type "Provenance",
          :zen.fhir/profileUri "http://hl7.org/fhir/us/davinci-hrex/StructureDefinition/hrex-provenance",
-         :zen.fhir/version "0.6.30-14",
+         :zen.fhir/version "0.6.31",
          :confirms #{hl7-fhir-us-core.us-core-provenance/schema
                      zen.fhir/Resource},
          :type zen/map,
